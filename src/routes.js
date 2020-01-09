@@ -17,7 +17,7 @@ export const routes = [
             component: Dashboard,
             name: 'dashboard',
             beforeEnter: (to, from, next) => {
-                if(!store.getters['auth/authenticated']){
+                if(!store.state.auth.token){
                     return next({
                         name: 'login'
                     })
