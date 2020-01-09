@@ -34,7 +34,7 @@ export const routes = [
             component: Lavori,
             name: 'lavori',
             beforeEnter: (to, from, next) => {
-                if(!store.getters['auth/authenticated']){
+                if(!store.state.auth.token){
                     return next({
                         name: 'login'
                     })
@@ -47,7 +47,7 @@ export const routes = [
             component: ListaClienti,
             name: 'clienti',
             beforeEnter: (to, from, next) => {
-                if(!store.getters['auth/authenticated']){
+                if(!store.state.auth.token){
                     return next({
                         name: 'login'
                     })
