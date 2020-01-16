@@ -54,6 +54,53 @@
       </span>
     </el-dialog>
 
+    <el-dialog :visible.sync="modalCustomerPassword" append-to-body width="60%">
+      <el-row type="flex" :gutter="10">
+        <el-col :span="24">
+          <div>
+            <el-card
+              v-for="item in customerPassword"
+              :key="item.id"
+              class="box-card"
+            >
+              <h1>{{ item.type }}</h1>
+              <p class="testo-dialog-customer-password">
+                <strong>Url:</strong> {{ item.url }}
+              </p>
+              <br />
+              <p class="testo-dialog-customer-password">
+                <strong>Host:</strong> {{ item.host }}
+              </p>
+              <br />
+              <p class="testo-dialog-customer-password">
+                <strong>Username:</strong>{{ item.username }}
+              </p>
+              <br />
+              <p class="testo-dialog-customer-password">
+                <strong>Password:</strong> {{ item.password }}
+              </p>
+              <br />
+              <p class="testo-dialog-customer-password">
+                <strong>Informazioni:</strong>{{ item.informations }}
+              </p>
+              <div style="width: 100%; text-align: right;">
+                <el-button
+                  type="primary"
+                  icon="el-icon-edit"
+                  circle
+                ></el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  circle
+                ></el-button>
+              </div>
+            </el-card>
+          </div>
+        </el-col>
+      </el-row>
+    </el-dialog>
+
     <el-row :gutter="10">
       <el-table :data="clienti" style="width: 100%">
         <el-table-column prop="company" label="Azienda" sortable>
@@ -65,12 +112,15 @@
         <el-table-column prop="mail" label="indirizzo e-mail" sortable>
         </el-table-column>
         <el-table-column align="right">
+          <!-- <template slot="header" slot-scope="scope">
+            <el-input v-model="search" placeholder="Cerca cliente" />
+          </template> -->
           <template slot-scope="scope">
             <el-tooltip content="Visualizza Accessi" placement="top">
               <el-button
                 circle
                 icon="el-icon-lock"
-                @click="modifyCustomer(scope.row.id)"
+                @click="visualizzaDatiCliente(scope.row.id)"
               ></el-button>
             </el-tooltip>
             <el-tooltip content="Modifica" placement="top">
@@ -105,11 +155,13 @@ export default {
       clienti: [],
       modalInserisciCliente: false,
       modalModificaCliente: false,
+      modalCustomerPassword: false,
       company: null,
       ref_name: null,
       phone: null,
       mail: null,
-      modCustomer: []
+      modCustomer: [],
+      customerPassword: []
     };
   },
   created() {
@@ -209,6 +261,18 @@ export default {
           this.deleteCustomer(id);
         })
         .catch(() => {});
+    },
+    visualizzaDatiCliente(id) {
+      axios
+        .get("customerpassword/" + id)
+        .then(response => {
+          this.customerPassword = response.data;
+          this.modalCustomerPassword = true;
+          return response;
+        })
+        .catch(error => {
+          return error;
+        });
     }
   }
 };
@@ -216,5 +280,8 @@ export default {
 <style scoped>
 .el-row {
   margin-bottom: 20px;
+}
+.testo-dialog-customer-password {
+  font-size: 18px;
 }
 </style>
