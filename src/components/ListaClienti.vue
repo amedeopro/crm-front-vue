@@ -66,15 +66,29 @@
         </el-table-column>
         <el-table-column align="right">
           <template slot-scope="scope">
-            <el-button size="mini" @click="modifyCustomer(scope.row.id)"
-              >Edit</el-button
-            >
-            <el-button
-              size="mini"
-              type="danger"
-              @click="openConfirmDelete(scope.row.id)"
-              >Delete</el-button
-            >
+            <el-tooltip content="Visualizza Accessi" placement="top">
+              <el-button
+                circle
+                icon="el-icon-lock"
+                @click="modifyCustomer(scope.row.id)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip content="Modifica" placement="top">
+              <el-button
+                circle
+                icon="el-icon-edit"
+                type="primary"
+                @click="modifyCustomer(scope.row.id)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip content="Elimina Cliente" placement="top">
+              <el-button
+                circle
+                type="danger"
+                icon="el-icon-delete"
+                @click="openConfirmDelete(scope.row.id)"
+              ></el-button>
+            </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
