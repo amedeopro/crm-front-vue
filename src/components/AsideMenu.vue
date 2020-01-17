@@ -21,6 +21,9 @@
       ></router-link>
     </div>
     <div v-if="authenticated">
+      <div style="width: 100%; text-align: center; margin-top: 10px;">
+        <el-avatar :size="60" :src="replaceLocalhost()"></el-avatar>
+      </div>
       <p style="width: 100%; text-align: center; margin:5% 0 5% 0;">
         <strong>Benvenuto</strong> {{ user.name }}
       </p>
@@ -50,6 +53,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import _  from "lodash";
 
 export default {
   name: "AsideMenu",
@@ -69,6 +73,11 @@ export default {
           name: "login"
         });
       });
+    },
+    replaceLocalhost(){
+      var localhost = _.replace(this.user.media, 'localhost', '80.211.134.4')
+
+      return localhost
     }
   }
 };

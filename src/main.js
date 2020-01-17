@@ -9,7 +9,9 @@ import { store } from './store/store';
 import Vuex from 'vuex';
 import Chartkick from 'vue-chartkick';
 import Chart from 'chart.js'
+import VueLodash from 'vue-lodash'
 
+const options = { name: 'lodash' }
 require('./store/subscriber');
 
 axios.defaults.baseURL = 'http://80.211.134.4/api'
@@ -21,7 +23,8 @@ import VueRouter from 'vue-router'
 Vue.use(ElementUI);
 Vue.use(VueRouter);
 Vue.use(Vuex);
-Vue.use(Chartkick.use(Chart))
+Vue.use(Chartkick.use(Chart));
+Vue.use(VueLodash, options)
 
 const router = new VueRouter({
   routes,
