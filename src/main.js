@@ -14,7 +14,7 @@ import VueLodash from 'vue-lodash'
 const options = { name: 'lodash' }
 require('./store/subscriber');
 
-axios.defaults.baseURL = 'http://80.211.134.4/api'
+axios.defaults.baseURL = 'http://80.211.134.4:8080/api'
 
 
 

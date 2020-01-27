@@ -75,7 +75,7 @@ export default {
       });
     },
     replaceLocalhost(){
-      var localhost = _.replace(this.user.media, 'localhost', '80.211.134.4')
+      var localhost = _.replace(this.user.media, 'localhost', '80.211.134.4:8080')
 
       return localhost
     }
